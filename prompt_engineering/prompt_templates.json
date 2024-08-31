@@ -1,0 +1,214 @@
+{
+    "zero_shot_vanilla_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. Your task is to classify a given text to determine whether it contains any concept of a disease (class 1) or not (class 0). The diseases mentioned must correspond to disease concepts defined in Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM). If the mentioned disease does not directly match these concepts, identified synonyms are acceptable. Respond ONLY with a JSON object. DO NOT include any other text in your response. For example: {\"class\": <INSERT CLASS>}."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_cot_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. Your task is to classify a given text to determine whether it contains any concept of a disease (class 1) or not (class 0). The diseases mentioned must correspond to disease concepts defined in Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM). If the mentioned disease does not directly match these concepts, identified synonyms are acceptable. To reach your conclusion on the class of the input text, follow a STEP-BY-STEP approach:\n\n1. Identify any concepts in the text that qualify as disease concepts according to the criteria.\n2. Provide an explanation for your decision.\n3. Conclude with the appropriate class.\n\nRespond ONLY with a JSON object in the following format: { \"explanation\": <INSERT EXPLANATION>, \"class\": <INSERT CLASS> }. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_carp_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. Your task is to classify a given text to determine whether it contains any concept of a disease (class 1) or not (class 0). The diseases mentioned must correspond to disease concepts defined in Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM). If the mentioned disease does not directly match these concepts, identified synonyms are acceptable. Follow these steps in a detailed, step-by-step manner:\n\n1. Extract relevant CLUES from the text. CLUES can be keywords or phrases that you identify as potential disease concepts.\n\n2. Based on the extracted CLUES, develop a diagnostic REASONING process. Explain how the CLUES support your classification decision.\n\n3. Determine the appropriate CLASS based on the CLUES and your REASONING process.\n\nRespond ONLY with a JSON object in the following format: {\"clues\": [<CLUE_1>, <CLUE_2>, ...], \"reasoning\": <INSERT REASONING>, \"class\": <INSERT CLASS>}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "few_shot_vanilla_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. Your task is to classify a given text to determine whether it contains any concept of a disease (class 1) or not (class 0). The diseases mentioned must correspond to disease concepts defined in Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM). If the mentioned disease does not directly match these concepts, identified synonyms are acceptable. Respond ONLY with a JSON object. DO NOT include any other text in your response. For example: {\"class\": <INSERT CLASS>}."
+        }
+    ],
+    "few_shot_cot_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. Your task is to classify a given text to determine whether it contains any concept of a disease (class 1) or not (class 0). The diseases mentioned must correspond to disease concepts defined in Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM). If the mentioned disease does not directly match these concepts, identified synonyms are acceptable. To reach your conclusion on the class of the input text, follow a STEP-BY-STEP approach:\n\n1. Identify any concepts in the text that qualify as disease concepts according to the criteria.\n2. Provide an explanation for your decision.\n3. Conclude with the appropriate class.\n\nRespond ONLY with a JSON object in the following format: { \"explanation\": <INSERT EXPLANATION>, \"class\": <INSERT CLASS> }. DO NOT include any other text in your response."
+        }
+    ],
+    "few_shot_carp_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. Your task is to classify a given text to determine whether it contains any concept of a disease (class 1) or not (class 0). The diseases mentioned must correspond to disease concepts defined in Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM). If the mentioned disease does not directly match these concepts, identified synonyms are acceptable. Follow these steps in a detailed, step-by-step manner:\n\n1. Extract relevant CLUES from the text. CLUES can be keywords or phrases that you identify as potential disease concepts.\n\n2. Based on the extracted CLUES, develop a diagnostic REASONING process. Explain how the CLUES support your classification decision.\n\n3. Determine the appropriate CLASS based on the CLUES and your REASONING process.\n\nRespond ONLY with a JSON object in the following format: {\"clues\": [<CLUE_1>, <CLUE_2>, ...], \"reasoning\": <INSERT REASONING>, \"class\": <INSERT CLASS>}. DO NOT include any other text in your response."
+        }
+    ],
+    "zero_shot_generate_cot_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. You will be provided with a text that is classified into one of two categories: either it contains disease concepts defined by Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM) (class 1), or it does not (class 0). Your task is to generate a step-by-step explanation justifying the assigned class. The explanation should NOT EXCEED 100 words. Respond ONLY with a JSON object in the following format: {'explanation': <INSERT EXPLANATION>}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "two_shot_generate_reason_ncbi": [
+        {
+            "role": "system",
+            "content": "You are an expert medical assistant. You will be provided with a text, assigned class of the text, and CLUES. The text is classified into one of two categories: either it contains disease concepts defined by Medical Subject Headings (MeSH) or Online Mendelian Inheritance in Man (OMIM) (class 1), or it does not (class 0). CLUES are keywords or phrases that are identified as potential disease concepts. Based on the given information, generate a diagnostic REASONING process using NO MORE than 100 words. Explain how the CLUES support the class of the text. Respond ONLY with a JSON object in the following format: {‘reasoning’: <INSERT REASONING>}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": "Text: Hypermethylation of the expanded repeat and of the FMR1 promoter is almost always present and apparently suppresses transcription, resulting in absence of the FMR1 protein.\n\nClass: 0\n\nCLUES: []"
+        },
+        {
+            "role": "assistant",
+            "content": "{'reasoning': 'The text is classified as class 0 because it does not contain any specific disease concepts as identified by the CLUES. Although the text discusses molecular mechanisms related to gene expression, the absence of CLUES indicates that it does not directly refer to a disease concept recognized by MeSH or OMIM, supporting the classification under class 0.'}"
+        },
+        {
+            "role": "user",
+            "content": "Text: Prader-Willi syndrome (PWS) and Angelman syndrome (AS) are distinct neurobehavioral disorders that most often arise from a 4-Mb deletion of chromosome 15q11-q13 during paternal or maternal gametogenesis, respectively.\n\nClass: 1\n\nCLUES: ['Prader-Willi syndrome', 'PWS', 'Angelman syndrome', 'AS', 'neurobehavioral disorders']"
+        },
+        {
+            "role": "assistant",
+            "content": "{'reasoning': \"The text is classified as class 1 because it contains disease concepts, specifically 'Prader-Willi syndrome' and 'Angelman syndrome,' which are neurobehavioral disorders recognized in MeSH or OMIM. The CLUES such as 'Prader-Willi syndrome,' 'PWS,' 'Angelman syndrome,' and 'AS' directly reference these disorders, confirming the presence of disease concepts and justifying the classification under class 1.\"}"
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_summarise": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to summarize the abstract of a PubMed article. If there are mentions of anything related to kidney diseases, disorders, conditions, or their treatment, INCLUDE that information in the summary, even if it is not the main focus of the study. The summary must be NO MORE than 150 words. Respond only with a JSON object. Do NOT include any other text in your response. For example: {'summary': <INSERT SUMMARY>}."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_generate_cot": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. You will be provided with the title, abstract, and assigned class of a PubMed article. The article is classified into one of two classes: it either mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1), or it does not (class 0). The mentioned kidney details do NOT need to be the primary focus of the study. Your task is to generate a STEP-BY-STEP explanation justifying the assigned class. The explanation should NOT EXCEED 100 words. To generate the explanation, first identify if the context contains anything relevant to kidney diseases, disorders, conditions, or their treatment. Respond ONLY with a JSON object in the following format: {'explanation': <INSERT EXPLANATION>}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "two_shot_generate_clues": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. You will be provided with the title, abstract, and assigned class of a PubMed article. The article is classified into one of two classes: it either mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1), or it does not (class 0). The mentioned kidney details do NOT need to be the primary focus of the study. Your task is to generate CLUES from the title and abstract that justify the assigned class of the article. CLUES can be: 1. Keywords (e.g., 'kidney', 'renal', 'nephrology'). 2. Phrases (e.g., 'chronic kidney disease', 'renal failure'). 3. Contextual information (e.g., mentions of symptoms related to kidney issues) 4. Semantic relations (e.g., treatments commonly associated with kidney conditions). 5. Semantic meaning (e.g., implications that indicate a focus on kidney health). 6. References to related research or conditions (e.g., studies on dialysis). Respond ONLY with a JSON object in the following format: {'clues': [<CLUE_1>, <CLUE_2>, ...]}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": "Title: Addressing Cognitive Function and Psychological Well-Being in Chronic Kidney Disease: A Systematic Review on the Use of Technology-Based Interventions.\n\nAbstract: Patients with chronic kidney disease (CKD) are at risk of cognitive decline and psychological distress, including anxiety, depression, and sleep disturbances. A systematic review of literature from 2012 to 2022 examined the effectiveness of technology-based interventions for managing these symptoms in CKD patients. Out of 739 articles, 13 studies focused on the usability, acceptability, and feasibility of such interventions targeting psychological symptoms, with none addressing cognitive functioning. The interventions provided feelings of safety, fun, and satisfaction, potentially improving psychological well-being. However, the heterogeneity of technologies used makes it difficult to draw conclusive findings about their efficiency. Future research should design non-pharmacological treatments for cognitive and psychological symptom improvement in CKD patients.\n\nClass: 1"
+        },
+        {
+            "role": "assistant",
+            "content": "{'clues': ['chronic kidney disease', 'CKD', 'patients with chronic kidney disease', 'psychological distress in CKD patients', 'cognitive decline in CKD patients', 'symptoms in CKD patients']}"
+        },
+        {
+            "role": "user",
+            "content": "Title: Systematic review and meta-analysis of studies assessing the relationship between statin use and risk of ovarian cancer..\n\nAbstract: This systematic review and meta-analysis investigated the link between statin use and ovarian cancer risk. Nine studies involving 435,237 women (including 1 RCT, 4 prospective, and 4 case-control studies) were analyzed. Overall, statin use was associated with a reduced risk of ovarian cancer (RR 0.87, 95% CI 0.74-1.03). The risk was significantly lower in populations with low pravastatin use (RR 0.83, 95% CI 0.70-0.99). Risk reduction varied by statin class and cancer histotype, with lipophilic statins showing a lower risk (RR 0.88, 95% CI 0.69-1.12) compared to hydrophilic statins. Long-term statin use further reduced the risk, especially when pravastatin use was low. High between-study heterogeneity suggests the need for more well-powered studies to clarify these subgroup effects.\n\nClass: 0"
+        },
+        {
+            "role": "assistant",
+            "content": "{'clues': []}"
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "three_shot_generate_reason": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. You will be provided with the title, abstract, assigned class, and CLUES of a PubMed article. The article is classified into one of two classes: it either mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1), or it does not (class 0). The kidney details do NOT need to be the primary focus of the study. CLUES can be: 1.Keywords (e.g., 'kidney', 'renal', 'nephrology'). 2. Phrases (e.g., 'chronic kidney disease', 'renal failure'). 3. Contextual information (e.g., mentions of symptoms related to kidney issues). 4. Semantic relations (e.g., treatments commonly associated with kidney conditions). 5. Semantic meaning (e.g., implications that indicate a focus on kidney health). 6. References to related research or conditions (e.g., studies on dialysis). Based on the given information, generate a diagnostic REASONING process using NO MORE than 100 words. Explain how the CLUES support the class of the article. Consider the following in your REASONING: 1. How the CLUES indicate the presence or absence of kidney-related topics. 2. The relevance and strength of each CLUE in supporting your decision. 3. The overall context and how it ties the CLUES together. Respond ONLY with a JSON object in the following format: {'reasoning': <INSERT REASONING>}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": "Title: Addressing Cognitive Function and Psychological Well-Being in Chronic Kidney Disease: A Systematic Review on the Use of Technology-Based Interventions.\n\nAbstract: Patients with chronic kidney disease (CKD) are at risk of cognitive decline and psychological distress, including anxiety, depression, and sleep disturbances. A systematic review of literature from 2012 to 2022 examined the effectiveness of technology-based interventions for managing these symptoms in CKD patients. Out of 739 articles, 13 studies focused on the usability, acceptability, and feasibility of such interventions targeting psychological symptoms, with none addressing cognitive functioning. The interventions provided feelings of safety, fun, and satisfaction, potentially improving psychological well-being. However, the heterogeneity of technologies used makes it difficult to draw conclusive findings about their efficiency. Future research should design non-pharmacological treatments for cognitive and psychological symptom improvement in CKD patients.\n\nClass: 1\n\nCLUES: ['chronic kidney disease', 'CKD', 'patients with chronic kidney disease', 'psychological distress in CKD patients', 'cognitive decline in CKD patients', 'symptoms in CKD patients']"
+        },
+        {
+            "role": "assistant",
+            "content": "{'reasoning': 'The abstract frequently mentions 'chronic kidney disease' (CKD) and focuses on patients with CKD experiencing cognitive and psychological symptoms. Keywords such as 'CKD', 'patients with chronic kidney disease', and phrases like 'psychological distress in CKD patients' and 'cognitive decline in CKD patients' directly indicate a strong connection to kidney-related conditions. The review targets interventions for symptoms in CKD patients, reinforcing the kidney-related context. These clues collectively support the classification as class 1.'}"
+        },
+        {
+            "role": "user",
+            "content": "Title: Systematic review and meta-analysis of studies assessing the relationship between statin use and risk of ovarian cancer..\n\nAbstract: This systematic review and meta-analysis investigated the link between statin use and ovarian cancer risk. Nine studies involving 435,237 women (including 1 RCT, 4 prospective, and 4 case-control studies) were analyzed. Overall, statin use was associated with a reduced risk of ovarian cancer (RR 0.87, 95% CI 0.74-1.03). The risk was significantly lower in populations with low pravastatin use (RR 0.83, 95% CI 0.70-0.99). Risk reduction varied by statin class and cancer histotype, with lipophilic statins showing a lower risk (RR 0.88, 95% CI 0.69-1.12) compared to hydrophilic statins. Long-term statin use further reduced the risk, especially when pravastatin use was low. High between-study heterogeneity suggests the need for more well-powered studies to clarify these subgroup effects.\n\nClass: 0\n\nCLUES: []"
+        },
+        {
+            "role": "assistant",
+            "content": "{'reasoning': 'The abstract exclusively focuses on the relationship between statin use and ovarian cancer risk, with no mention of kidney diseases, conditions, or treatments. There are no keywords or phrases related to kidney health, nor any contextual information suggesting a link to kidney-related topics. The clues provided are entirely focused on cancer and statin use, supporting the classification as class 0.'}"
+        },
+        {
+            "role": "user",
+            "content": "Title: Effect of viscous fiber supplementation on obesity indicators in individuals consuming calorie-restricted diets: a systematic review and meta-analysis of randomized controlled trials.\n\nAbstract: This study analyzed 15 trials with 1347 participants and found that viscous fiber supplementation, when combined with a calorie-deficient diet, significantly decreased body weight, BMI, and body fat in overweight adults and those with cardiovascular disease risk factors. Although there was no effect on waist circumference, the study suggests that viscous fiber may play a role in weight management. It's important to note that the certainty of evidence was moderate for body weight, BMI, and body fat, and low for waist circumference due to inconsistency and imprecision. The study didn't specifically focus on kidney diseases or disorders, but the results could have implications for weight management in overweight individuals with kidney issues, as maintaining a healthy weight is important for kidney health.\n\nClass: 0\n\nCLUES: ['viscous fiber supplementation', 'obesity indicators', 'calorie-restricted diets', 'body weight', 'BMI', 'body fat', 'overweight adults', 'cardiovascular disease risk factors', 'weight management']"
+        },
+        {
+            "role": "assistant",
+            "content": "The abstract focuses on the impact of viscous fiber supplementation on obesity indicators such as body weight, BMI, and body fat in individuals on calorie-restricted diets. Keywords like 'viscous fiber supplementation', 'obesity indicators', 'body weight', 'BMI', and 'body fat' are related to weight management and cardiovascular risk but not specifically to kidney diseases or disorders. The abstract explicitly states that the study did not focus on kidney diseases, and while there are general health implications, they do not specifically tie to kidney health. Therefore, the classification as class 0 is correct."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_vanilla": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to classify a PubMed article based on its title and abstract. Determine if it mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1) or not (class 0). The mentioned kidney details DO NOT need to be the primary focus of the study. Respond ONLY with a JSON object. DO NOT include any other text in your response. For example: {\"class\": <INSERT CLASS>}."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_cot": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to classify a PubMed article based on its title and abstract. Determine if it mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1) or not (class 0). The mentioned kidney details DO NOT need to be the primary focus of the study. To reach your conclusion on the class of the input article, work out in a STEP-BY-STEP fashion:\n\n1. Identify if the context contains anything relevant to kidney diseases, disorders, conditions, or their treatment.\n2. Provide an explanation for your decision.\n3. Conclude with the appropriate class.\n\nRespond ONLY with a JSON object in the following format: { \"explanation\": <INSERT EXPLANATION>, \"class\": <INSERT CLASS> }. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "zero_shot_carp": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to classify a PubMed article based on its title and abstract. Determine if it mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1) or not (class 0). The mentioned kidney details DO NOT need to be the primary focus of the study. Follow these steps in a detailed, step-by-step fashion:\n\n1. Extract relevant CLUES from the title and abstract. CLUES can be:\na. Keywords (e.g., \"kidney\", \"renal\", \"nephrology\").\nb. Phrases (e.g., \"chronic kidney disease\", \"renal failure\").\nc. Contextual information (e.g., mentions of symptoms related to kidney issues)\nd.Semantic relations (e.g., treatments commonly associated with kidney conditions).\ne.Semantic meaning (e.g., implications that indicate a focus on kidney health).\nf.References to related research or conditions (e.g., studies on dialysis).\n\n2. Based on the extracted CLUES and the context provided in the title and abstract, deduce a diagnostic REASONING process. Explain how the CLUES support your classification decision. Consider the following in your REASONING:\na. How the CLUES indicate the presence or absence of kidney-related topics.\nb. The relevance and strength of each CLUE in supporting your decision.\nc. The overall context and how it ties the CLUES together.\n\n3. Determine the CLASS based on the CLUES, your REASONING process, and the given title and abstract.\n\nRespond ONLY with a JSON object in the following format: {\"clues\": [<CLUE_1>, <CLUE_2>, ...], \"reasoning\": <INSERT REASONING>, \"class\": <INSERT CLASS>}. DO NOT include any other text in your response."
+        },
+        {
+            "role": "user",
+            "content": ""
+        }
+    ],
+    "few_shot_vanilla": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to classify a PubMed article based on its title and abstract. Determine if it mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1) or not (class 0). The mentioned kidney details DO NOT need to be the primary focus of the study. Respond ONLY with a JSON object. DO NOT include any other text in your response. For example: {\"class\": <INSERT CLASS>}."
+        }
+    ],
+    "few_shot_cot": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to classify a PubMed article based on its title and abstract. Determine if it mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1) or not (class 0). The mentioned kidney details DO NOT need to be the primary focus of the study. To reach your conclusion on the class of the input article, work out in a STEP-BY-STEP fashion:\n\n1. Identify if the context contains anything relevant to kidney diseases, disorders, conditions, or their treatment.\n2. Provide an explanation for your decision.\n3. Conclude with the appropriate class.\n\nRespond ONLY with a JSON object in the following format: { \"explanation\": <INSERT EXPLANATION>, \"class\": <INSERT CLASS> }. DO NOT include any other text in your response."
+        }
+    ],
+    "few_shot_carp": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant. Your task is to classify a PubMed article based on its title and abstract. Determine if it mentions anything related to kidney diseases, disorders, conditions, or their treatment (class 1) or not (class 0). The mentioned kidney details DO NOT need to be the primary focus of the study. Follow these steps in a detailed, step-by-step fashion:\n\n1. Extract relevant CLUES from the title and abstract. CLUES can be:\na. Keywords (e.g., \"kidney\", \"renal\", \"nephrology\").\nb. Phrases (e.g., \"chronic kidney disease\", \"renal failure\").\nc. Contextual information (e.g., mentions of symptoms related to kidney issues)\nd.Semantic relations (e.g., treatments commonly associated with kidney conditions).\ne.Semantic meaning (e.g., implications that indicate a focus on kidney health).\nf.References to related research or conditions (e.g., studies on dialysis).\n\n2. Based on the extracted CLUES and the context provided in the title and abstract, deduce a diagnostic REASONING process. Explain how the CLUES support your classification decision. Consider the following in your REASONING:\na. How the CLUES indicate the presence or absence of kidney-related topics.\nb. The relevance and strength of each CLUE in supporting your decision.\nc. The overall context and how it ties the CLUES together.\n\n3. Determine the CLASS based on the CLUES, your REASONING process, and the given title and abstract.\n\nRespond ONLY with a JSON object in the following format: {\"clues\": [<CLUE_1>, <CLUE_2>, ...], \"reasoning\": <INSERT REASONING>, \"class\": <INSERT CLASS>}. DO NOT include any other text in your response."
+        }
+    ]
+}
