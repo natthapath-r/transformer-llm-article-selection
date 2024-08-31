@@ -33,13 +33,13 @@ python fetch_pubmed_articles.py --file_path <path_to_saved_pmids> --output_path 
 For GridSearchCV, 5-fold cross-validation is used to find the best hyperparameters. The hyperparameter search is limited to learning rate and the number of epochs. The code can be run using the following command:
 
 ```
-python gridsearchcv.py --dataset_path <path_to_dataset> --model <model_name> --batch_size <batch_size> --max_length <max_sequence_length>
+python -m torch.distributed.launch --nproc_per_node=<num_gpus> gridsearchcv.py --dataset_path <path_to_dataset> --model <model_name> --batch_size <batch_size> --max_length <max_sequence_length>
 ```
 
 As for fine-tuning the transformer models, the code can be run using the following command:
 
 ```
-python fine_tuning.py --dataset_path <path_to_dataset> --model <model_name> --batch_size <batch_size> --max_length <max_sequence_length> --lr <learning_rate> --num_epochs <number_of_epochs> --seed <random_seed>
+python -m torch.distributed.launch --nproc_per_node=<num_gpus> fine_tuning.py --dataset_path <path_to_dataset> --model <model_name> --batch_size <batch_size> --max_length <max_sequence_length> --lr <learning_rate> --num_epochs <number_of_epochs> --seed <random_seed>
 ```
 
 ## MedPrompt
@@ -60,8 +60,27 @@ python dynamic_few_shot_prompting.py --dataset_path <path_to_dataset> --database
 
 `prompt_templates.json` contains the prompt templates for traditional, Chain-of-Thought (CoT), and Clue and Reasoning Prompting (CLUE) in both few-shot and zero-shot settings. Additionally, the prompts used for summarizing the PubMed articles and self-generated reasoning processes are stored in this file. The prompts are available for both classifying articles related to kidney disease and NCBI Disease Corpus sequence classification tasks.
 
+The file containing the generated examples for the Chain-of-Thought (CoT) and Clue and Reasoning Prompting (CLUE) should be a JSON file with the following structure:
+
+```json
+{
+  "PMID": {
+    "explanation": "Explanation from the CoT reasoning process",
+    "Clues": ["Clue 1", "Clue 2", "Clue 3"],
+    "reasoning": "Reasoning from the CARP reasoning process"
+  }
+}
+```
+
 The code for generating LLMs' predictions for the articles and self-generated reasoning processes can be run using the following command:
 
 ```
-python prompting_llms.py --dataset_path <path_to_dataset> --prompt_temp <path_to_prompt_templates> --model <model_name> --prompt_type <name_of_prompt_in_prompt_templates> --output_path <output_path> --num_shots <number_of_few_shot_examples> --generated_examples_path <path_to_generated_examples> [Optional] --top_32_similar_articles_path <path_to_results_from_dynamic_few_shot_prompting> [Optional]
+python prompting_llm.py --dataset_path <path_to_dataset> --prompt_temp <path_to_prompt_templates> --model <model_name> --prompt_type <name_of_prompt_in_prompt_templates> --output_path <output_path> --num_shots <number_of_few_shot_examples> [Optional]--generated_examples_path <path_to_generated_examples> [Optional]--top_32_similar_articles_path <path_to_results_from_dynamic_few_shot_prompting>
 ```
+
+## Datasets
+
+Here are the links to the datasets used in this project:
+
+- [Classifying articles related to kidney disease](https://huggingface.co/datasets/nr2n23/kidney-disease-article-classification)
+- [NCBI Disease Corpus sequence classification](https://huggingface.co/datasets/nr2n23/ncbi-disease-sequence-classification)

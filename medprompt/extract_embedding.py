@@ -94,7 +94,7 @@ if __name__ == "__main__":
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS embeddings (
-            id TEXT PRIMARY KEY,
+            pmid TEXT PRIMARY KEY,
             embedding TEXT,
             label INTEGER
         )
@@ -110,7 +110,7 @@ if __name__ == "__main__":
                 encoded_embedding = encode_embeddings(embeddings[idx])
                 cursor.execute(
                     """
-                    INSERT OR REPLACE INTO embeddings (id, embedding, label)
+                    INSERT OR REPLACE INTO embeddings (pmid, embedding, label)
                     VALUES (?, ?, ?)
                 """,
                     (pmid, encoded_embedding, int(batch["labels"][idx].item())),
